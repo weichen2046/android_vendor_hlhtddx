@@ -45,7 +45,7 @@ my_dbg_files: $(PRODUCT_OUT)/product-$(1).svg
 endef
 
 $(foreach m, apk exe etc, \
-  $(call generate_product_module_graph($m)) \
+  $(call generate_product_module_graph($$m)) \
   )
 
 # If ONE_SHOT_MAKEFILE is set, our view of the world is smaller, so don't
