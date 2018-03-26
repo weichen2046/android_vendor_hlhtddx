@@ -1,5 +1,6 @@
 # Print a list of the modules that could be built
 PRODUCT_INFO_JSON := $(PRODUCT_OUT)/product-info.json
+VENDOR_TOOL_PATH := $(call my-dir)/../tools
 
 product := $(INTERNAL_PRODUCT)
 
@@ -21,7 +22,7 @@ $(PRODUCT_INFO_JSON):
 
 product-module-dot: $(PRODUCT_INFO_JSON) $(MODULE_INFO_JSON) $(MODULE_DEPS_JSON)
 	@echo Generating $@
-	$(hide) python vendor/ts/build/tools/product_deps_graph.py
+	$(hide) python ${VENDOR_TOOL_PATH}/product_deps_graph.py
 
 $(PRODUCT_OUT)/module-apk.dot: product-module-dot
 $(PRODUCT_OUT)/module-apk.svg: $(PRODUCT_OUT)/module-apk.dot
