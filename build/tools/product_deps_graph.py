@@ -74,7 +74,7 @@ class Module:
         types = [type for type in types if not (type == 'STATIC_LIBRARIES')]
         paths = [path.replace(self.product.product_out, '') for path in paths]
 
-        self.path = module['path']
+        self.path = module['path'][0]
 
         if len(types) > 1 and len(paths) != len(types):
             sys.stderr.write('Warning: types > 1 and paths != types:\tname : %s\n\ttypes : %s\n\tpaths : %s\n' % (self.name, types, paths))
