@@ -114,7 +114,10 @@ class VhalTest:
             elif valType in self._types.TYPE_BYTES:
                 value = rxMsg.value[0].bytes_value
             elif valType == vhal_consts_2_1.VEHICLEPROPERTYTYPE_BOOLEAN:
-                value = rxMsg.value[0].int32_values[0]
+                if rxMsg.value[0].int32_values:
+                    value = rxMsg.value[0].int32_values[0]
+                else:
+                    value = None
             elif valType in self._types.TYPE_INT32:
                 value = rxMsg.value[0].int32_values[0]
             elif valType in self._types.TYPE_INT64:
@@ -292,7 +295,7 @@ class VhalTest:
     #   INFO        20
     #   DEBUG       10
     #   NOTSET      0
-    def __init__(self, types, logLevel=20):
+    def __init__(self, types, logLevel=10):
         self._types = types
         # Configure the logger
         logging.basicConfig()
