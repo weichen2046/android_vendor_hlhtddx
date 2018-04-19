@@ -72,7 +72,7 @@ class Module:
                 return
 
         types = [type for type in types if not (type == 'STATIC_LIBRARIES')]
-        paths = [path.replace(self.product.product_out, '') for path in paths]
+        paths = [path.replace(self.product.product_out, '') for path in paths if not (path.endswith('.vdex') or path.endswith('.odex'))]
 
         self.path = module['path'][0]
 
