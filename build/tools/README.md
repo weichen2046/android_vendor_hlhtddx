@@ -1,6 +1,6 @@
-# Tools
+# Build Enhancement Tools
 
-Brief description of build helper tools.
+> TODO: Add brief description of build enhancement tools.
 
 ## Install dependent Python packages
 
@@ -10,6 +10,10 @@ Brief description of build helper tools.
 pip install nose
 pip install demjson
 ```
+
+## Local http server
+
+Refer to [README.md](./localhttpserver/README.md)
 
 ## Run tests
 
