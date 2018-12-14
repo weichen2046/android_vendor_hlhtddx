@@ -8,8 +8,8 @@ $(PRODUCT_INFO_JSON):
 	@echo Generating $@
 	$(hide) echo -ne '{ \n' > $@
 	$(hide) echo -ne ' "name": "$(product)", \n' >> $@
-	$(hide) echo -ne ' "model": "$(PRODUCTS.$(product).PRODUCT_MODEL))", \n' >> $@
-	$(hide) echo -ne ' "device": "$(PRODUCTS.$(product).PRODUCT_DEVICE))", \n' >> $@
+	$(hide) echo -ne ' "model": "$(PRODUCTS.$(product).PRODUCT_MODEL)", \n' >> $@
+	$(hide) echo -ne ' "device": "$(PRODUCTS.$(product).PRODUCT_DEVICE)", \n' >> $@
 	$(hide) echo -ne ' "host_out": "$(HOST_OUT)", \n' >> $@
 	$(hide) echo -ne ' "product_out": "$(PRODUCT_OUT)", \n' >> $@
 	$(hide) echo -ne ' "packages": [$(foreach w,$(sort $(PRODUCTS.$(product).PRODUCT_PACKAGES)),"$(w)", )], \n' | sed -e 's/, *\]/]/g' -e 's/, *\}/ }/g' -e '$$s/,$$//' >> $@
@@ -20,6 +20,8 @@ $(PRODUCT_INFO_JSON):
 .PHONY: product-module-dot
 .PHONY: my_dbg_files
 
+# FIXME: Phony target always be considered up to date,
+# so does it make sense to put prerequisites here?
 product-module-dot: $(PRODUCT_INFO_JSON) $(MODULE_INFO_JSON) $(MODULE_DEPS_JSON)
 	@echo Generating $@
 	$(hide) python ${VENDOR_TOOL_PATH}/product_deps_graph.py
@@ -27,6 +29,10 @@ product-module-dot: $(PRODUCT_INFO_JSON) $(MODULE_INFO_JSON) $(MODULE_DEPS_JSON)
 	$(hide) python ${VENDOR_TOOL_PATH}/product_deps_graph.py -t apk
 	$(hide) python ${VENDOR_TOOL_PATH}/product_deps_graph.py -t etc
 
+# NOTE: prebuild ckati will exit with status 1 when it finds real file xxx depends on PHONY target and cause `make files` fail.
+# I find no means to pass parameter '--warn_real_to_phony' to prebuild ckati under directory 'prebuilts/build-tools/linux-x86/bin/ckati'.
+# A workaround here is to use custom build of ckati and before build ckati from souce, comment out related lines in dep.cc
+# under source directory of kati.
 $(PRODUCT_OUT)/module-apk.dot: product-module-dot
 $(PRODUCT_OUT)/module-apk.svg: $(PRODUCT_OUT)/module-apk.dot
 	@echo Generating $@
