@@ -26,7 +26,6 @@ export interface IModulesInfo {
 export class ModulesService {
 
   modulesInfo: IModulesInfo;
-
   constructor(private http: HttpClient) { }
 
   public loadDataFile(): Observable<boolean> {
@@ -40,6 +39,19 @@ export class ModulesService {
       }),
       catchError(err => of(false))
     );
+  }
+
+  public getModuleNames(): string[] {
+    const names = [];
+    if (this.modulesInfo) {
+      for (const key in this.modulesInfo) {
+        if (this.modulesInfo.hasOwnProperty(key)) {
+          const moduleInfo = this.modulesInfo[key];
+          names.push(moduleInfo.module_name);
+        }
+      }
+    }
+    return names;
   }
 
 }
