@@ -33,10 +33,8 @@ export class ModulesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    console.log('delay to show load dialog');
     this.showDialogTimeoutId = setTimeout(this.showLoadingDataDialog.bind(this), 500);
     this.modulesSrv.loadDataFile().subscribe(result => {
-      console.log('cancel to show load dialog');
       clearTimeout(this.showDialogTimeoutId);
       this.showDialogTimeoutId = undefined;
       if (this.loadingDialogRef) {
@@ -78,7 +76,6 @@ export class ModulesComponent implements OnInit, OnDestroy {
   }
 
   private showLoadingDataDialog() {
-    console.log('real show loading dialog');
     this.loadingDialogRef = this.dialog.open(LoadingDialogComponent, {
       disableClose: true,
     });

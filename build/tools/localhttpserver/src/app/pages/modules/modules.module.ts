@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
+import { CovalentJsonFormatterModule } from '@covalent/core/json-formatter';
 
 import { ModulesRoutingModule } from './modules-routing.module';
 import { ModulesComponent } from './modules.component';
@@ -22,6 +23,7 @@ import { LoadingDialogComponent } from './loading-dialog/loading-dialog.componen
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    CovalentJsonFormatterModule,
     MatAutocompleteModule,
     MatDialogModule,
     MatFormFieldModule,

@@ -299,6 +299,13 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@covalent/core@^2.0.0":
+  version "2.0.0"
+  resolved "http://registry.npm.taobao.org/@covalent/core/download/@covalent/core-2.0.0.tgz#58912dc0ccc3bde09f8797e19e9e87cf157c796d"
+  integrity sha1-WJEtwMzDveCfh5fhnp6HzxV8eW0=
+  dependencies:
+    tslib "^1.9.0"
+
 "@ngtools/webpack@7.1.4":
   version "7.1.4"
   resolved "http://registry.npm.taobao.org/@ngtools/webpack/download/@ngtools/webpack-7.1.4.tgz#632ece6ed8e05fe743554cc935be36a653376f01"
